@@ -14,7 +14,7 @@ int main(void){
     sig_relance.sa_flags = SA_RESTART;
     sigemptyset(&sig_relance.sa_mask);
     sigaction(SIGALRM, &sig_relance, &ancien);
-    alarm(15);
+    alarm(3);
     c=getchar();
     alarm(0);
     sigaction(SIGALRM, &ancien, NULL);
