@@ -6,7 +6,8 @@
 void boucleInfini(void){
     while(1){
         printf(".\n");
-        sleep(0.5);
+        sleep(1.5);
+        printf("\n");
     }
 }
 
