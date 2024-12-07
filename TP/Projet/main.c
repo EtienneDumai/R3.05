@@ -2,6 +2,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
 
 int nombreThreads = 0;
 int nombresPersonnesTab=0;
@@ -10,7 +11,8 @@ int nombreSecondes = 0;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void* bosser() {
-
+    int limite = rand()%6; 
+    limite = limite + 5;
     sleep(2);
     printf("J'y suis tkt pas \n");
 
@@ -18,11 +20,18 @@ void* bosser() {
     nombreThreads++;
     nombrePersonne = nombreThreads;
     pthread_mutex_unlock(&mutex);
-
+    time_t fin = time(NULL) + limite;
     while(1) {
         sleep(1);
         pthread_mutex_lock(&mutex);
         if(nombreSecondes == 10) {
+            break;
+        }
+        if (fin < time(NULL)) {
+            printf("Je suis en retard dcp je pars.\n");
+            nombresPersonnesTab--; 
+            nombreThreads--; // On décrémente le nombre de threads présents
+            pthread_mutex_unlock(&mutex);
             break;
         }
         pthread_mutex_unlock(&mutex);
