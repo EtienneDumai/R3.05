@@ -5,11 +5,16 @@ A : 1 B: 2 C : 4
 */
 #include <stdio.h>
 #include <unistd.h>
-int main() {
-    //Question 2
-    //programme qui cherche un element dans un tableau de grande taille
-    //definissions des variables
-    int xTrouve = 0;
-    int tableau[1000000];
+int main(void) {
+    pid_t pid = fork();
+    printf("Hello World\n");
+    if (pid == 0)
+    {
+        printf("I am the child\n");
+    }
+    else
+    {
+        printf("I am the parent\n");
+    }
     
 }
